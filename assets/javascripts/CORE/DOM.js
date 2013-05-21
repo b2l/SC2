@@ -12,3 +12,5 @@ DOM.prototype = {
         }
     }
 }
+
+module.exports = DOM;
