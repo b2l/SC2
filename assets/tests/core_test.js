@@ -28,6 +28,24 @@ DOM.prototype = {
     },
     isVisible: function(domNode) {
         return /^((?!none).)*$/.test(domNode.style.display) && /^((?!hidden).)*$/.test(domNode.style.visibility)
+    },
+
+    insertBefore: function(domNode, nodeToInsert) {
+        domNode.parentNode.insertBefore(nodeToInsert, domNode);
+    },
+
+    data: function(domNode, key, value) {
+        if (arguments.length === 3) {
+            domNode.setUserData(key, value);
+        } else {
+            return domNode.getUserData(key);
+        }
+    },
+
+    bind: function(context, method) {
+        return function() {
+            return context[name].apply(context, arguments);
+        }
     }
 }
 var $ = new DOM();
@@ -101,5 +119,37 @@ TestCase('DOM TEST', {
         // Then
         assertEquals("block", node.style.display);
         assertTrue($.isVisible(node));
+    },
+
+    "test we can set or get data on node": function() {
+        // Given
+        var n = document.createElement('div');
+        n.setAttribute('id', 'test-node');
+        document.querySelector('body').appendChild(n);
+        var node = $.find("#test-node");
+
+        // When
+        $.data(node, "mydata", "myvalue");
+
+        // Then
+        assertEquals("myvalue", $.data(node, "mydata"));
+    },
+
+    "test We can bind method call to set the context": function() {
+        // Given
+        var n = document.createElement('div');
+        n.setAttribute('id', 'toto');
+        document.body.appendChild(n);
+        var obj = {
+            click: function(e) {
+                e.preventDefault();
+                // Then
+                assertEquals(this, obj);
+            }
+        }
+        n.addEventListener('click', $.bind(obj, 'click'), true);
+
+        // When
+        n.click();
     }
 });
