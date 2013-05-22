@@ -1,6 +1,14 @@
 module.exports = function(grunt) {
     grunt.initConfig({
 
+        compass: {
+            dev: {
+                options: {
+                    config: 'assets/compass_config.rb'
+                }
+            }
+        },
+
         watch: {
             js: {
                 files: ['assets/javascripts/**/*.js'],
