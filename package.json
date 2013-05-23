@@ -1,6 +1,7 @@
 {
     "name": "SC2",
     "description": "",
+    "version": "0.0.1",
     "author": "B2L <b2l.powa@gmail.com>",
     "dependencies": {
         "grunt": "0.4.1",
@@ -8,5 +9,5 @@
         "grunt-contrib-compass": "0.1.3",
         "grunt-browserify2": "0.1.7"
     },
-    "engine": "node >= 0.8.1"
+    "engine": "node >= 0.8"
 }
