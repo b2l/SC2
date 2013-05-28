@@ -1,0 +1,36 @@
+#!/bin/bash
+if [ 0 -eq `git remote -v | grep -c push` ]; then
+	REMOTE_REPO=`git remote -v | sed 's/origin//'`
+else
+	EMOTE_REPO=`git remote -v | grep "(push)" | sed 's/origin//' | sed 's/(push)//'`
+fi
+
+if [ ! -z "$1" ]; then
+	it add .
+	it commit -a -m "$1"
+fi
+
+git pull
+
+if [ ! -d ".privatebuild" ]; then
+	git clone . .privatebuild
+fi
+
+cd .privatebuild
+git clean -df
+git pull
+
+## --- Run all test before pushing
+if [ -e "build.xml" ]; then
+	ant test
+
+	if [ $? -eq 0 ]; then
+		echo "Publishing to: $REMOTE_REPO"
+		git push $REMOTE_REPO master
+	else
+		echo "Unable to build"
+		exit $?
+	fi
+else
+	echo "Nothing to test here, is it a real git unbreakable project ?"
+fi

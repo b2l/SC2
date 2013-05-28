@@ -20,3 +20,5 @@ test-result
 server.pid
 *.iml
 *.eml
+.privaterepo
+node_modules
