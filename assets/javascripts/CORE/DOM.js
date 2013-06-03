@@ -23,7 +23,7 @@ DOM.prototype = {
         if (this.isVisible(domNode)) {
             this.hide(domNode);
         } else {
-            thid.show(domNode);
+            this.show(domNode);
         }
     },
     isVisible: function(domNode) {

@@ -25,13 +25,17 @@
 
             <section class="content-wrapper">
                 <div class="content">
-                    #{doLayout /}
+                    <ul>
+                    #{list items:units, as:'unit'}
+                        <li>${unit}</li>
+                    #{/list}
+                    </ul>
                 </div>
             </section>
             <div class="footer-placeholder"></div>
         </div>
         <section class="footer">
-            SC2 App
+            powered by sudogg
         </section>
     </body>
 </html>
