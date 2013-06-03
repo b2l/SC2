@@ -11,7 +11,6 @@ import play.test.UnitTest;
 public class XmlFileParsingTest extends UnitTest{
 
 	@Test
-	@Ignore
 	public void getUnitsNamesTest(){
 		File xml = new File("ressources/UnitData.xml");
 		XMLParserSC2 parser = new XMLParserSC2(xml);
@@ -19,8 +18,8 @@ public class XmlFileParsingTest extends UnitTest{
 		parser.parse();
 		List<String> names = parser.getUnitNames();
 		
-		assertNotNull("List of sc2 unit names is null", names);
-		assertTrue("List of sc2 unit names is empty", names.size()>0);
+		assertNotNull("List of sc2 unit names is not null", names);
+		assertTrue("List of sc2 unit names is not empty", names.size()>0);
 		assertNotNull("List of sc2 unit names contains Zergling", names.contains("Zergling"));
 	}
 }

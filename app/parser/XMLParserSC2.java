@@ -2,15 +2,20 @@ package parser;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import com.sun.xml.internal.txw2.Document;
 
 public class XMLParserSC2 {
 	private File xml;
@@ -21,15 +26,21 @@ public class XMLParserSC2 {
 	}
 
 	public List<String> getUnitNames() {
-		// TODO Auto-generated method stub
-		return null;
+		NodeList units = parsedDocument.getElementsByTagName("CUnit");
+		List<String> names = new ArrayList<String>();
+		int nbUnits = units.getLength();
+		for(int i=0; i<nbUnits; i++){
+			Element element = (Element) units.item(i);
+			names.add(element.getAttribute("id"));
+		}
+		return names;
 	}
 
 	public void parse() {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		try {
 			DocumentBuilder db = dbf.newDocumentBuilder();
-			org.w3c.dom.Document dom = db.parse(xml);
+			parsedDocument = db.parse(xml);
 		}catch(ParserConfigurationException pce) {
 			pce.printStackTrace();
 		}catch(SAXException se) {
