@@ -1,0 +1,63 @@
+html, body, section, h1, h2, h3, h4, h5, h6, div, ul {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100% !important;
+    display: block;
+}
+
+.page-wrapper {
+    position: relative;
+    min-height: 100%;
+    overflow: hidden;
+    margin-bottom: -100px; /* Sticky footer */
+}
+
+.header {
+    overflow: auto;
+}
+
+.header .title {
+    height: 100px;
+    width: 200px;
+    padding: 10px;
+    color: white;
+    float: left;
+}
+
+.header .main-menu {
+    border: 2px solid #666;
+    border-radius: 5px;
+    margin: 160px 10px 0 10px;
+    text-align: left;
+}
+
+.header li {
+    display: inline-block;
+    padding: 10px 20px;
+    color: black;
+}
+
+.header li:hover {
+    background: #666;
+}
+
+.footer-placeholder {
+    height: 100px;
+    display: block;
+}
+
+.footer {
+    height: 80px;
+    padding: 10px 0;
+    color: white;
+
+    background: #4488ff;
+    text-align: center;
+}

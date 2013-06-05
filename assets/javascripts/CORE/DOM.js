@@ -1,7 +1,4 @@
-function DOM() {
-};
-
-DOM.prototype = {
+var DOM = {
     find: function(selector) {
         var nodeList = document.querySelectorAll(selector);
         return (nodeList.length === 1) ? nodeList[0] : nodeList;
@@ -36,16 +33,17 @@ DOM.prototype = {
 
     data: function(domNode, key, value) {
         if (arguments.length === 3) {
-            domNode.setUserData(key, value);
+            domNode[key] = value;
         } else {
-            return domNode.getUserData(key);
+            return domNode[key];
         }
     },
 
-    bind: function(context, method) {
+    bind: function(context, name) {
         return function() {
+            if (!context[name]) return;
             return context[name].apply(context, arguments);
         }
     }
-}
+};
 module.exports = DOM;

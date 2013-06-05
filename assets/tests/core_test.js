@@ -1,155 +1,118 @@
-function DOM() {
-};
+var DOM = require('../javascripts/CORE/DOM.js');
 
-DOM.prototype = {
-    find: function(selector) {
-        var nodeList = document.querySelectorAll(selector);
-        return (nodeList.length === 1) ? nodeList[0] : nodeList;
-    },
-
-    css: function(domNode, styles) {
-        for (prop in styles) {
-            domNode.style[prop] = styles[prop];
-        }
-    },
-
-    hide: function(domNode) {
-        this.css(domNode, {"display": "none"});
-    },
-    show: function(domNode) {
-        this.css(domNode, {"display": "block"});
-    },
-    toggle: function(domNode) {
-        if (this.isVisible(domNode)) {
-            this.hide(domNode);
-        } else {
-            thid.show(domNode);
-        }
-    },
-    isVisible: function(domNode) {
-        return /^((?!none).)*$/.test(domNode.style.display) && /^((?!hidden).)*$/.test(domNode.style.visibility)
-    },
-
-    insertBefore: function(domNode, nodeToInsert) {
-        domNode.parentNode.insertBefore(nodeToInsert, domNode);
-    },
-
-    data: function(domNode, key, value) {
-        if (arguments.length === 3) {
-            domNode.setUserData(key, value);
-        } else {
-            return domNode.getUserData(key);
-        }
-    },
-
-    bind: function(context, method) {
-        return function() {
-            return context[name].apply(context, arguments);
-        }
-    }
+function init() {
+    document.querySelector('body').innerHTML = "";
 }
-var $ = new DOM();
 
+test("test Assert we can get all dom node matching a selector", function () {
+    init();
 
-TestCase('DOM TEST', {
-    "test Assert we can get all dom node matching a selector": function () {
-        // Given
-        var d = document.createElement("div");
-        document.querySelector('body').appendChild(d);
-        d = document.createElement("div");
-        document.querySelector('body').appendChild(d);
-        d = document.createElement("div");
-        d.setAttribute("id", "toto");
-        document.querySelector('body').appendChild(d);
+    // Given
+    var d = document.createElement("div");
+    document.querySelector('body').appendChild(d);
+    d = document.createElement("div");
+    document.querySelector('body').appendChild(d);
+    var expectedDomNode = document.createElement("div");
+    expectedDomNode.setAttribute("id", "toto");
+    document.querySelector('body').appendChild(expectedDomNode);
 
-        // When
-        var allDivs = $.find('div');
-        var divToto = $.find("#toto");
+    // When
+    var allDivs = DOM.find('div');
+    var divToto = DOM.find("#toto");
 
-        // Then
-        assertEquals("we should have 3 div in the dom", 3, allDivs.length);
-        assertEquals(d, divToto);
-    },
+    // Then
+    equal(allDivs.length, 3);
+    equal(expectedDomNode.getAttribute('id'), divToto.getAttribute('id'));
+});
 
-    "test we could apply style to node": function() {
-        // Given
-        var n = document.createElement('div');
-        n.setAttribute('id', 'test-node');
-        document.querySelector('body').appendChild(n);
-        var node = $.find('#test-node')[0];
+test("test we could apply style to node", function() {
+    init();
 
-        // When
-        $.css(node, {
-            border: "1px solid red",
-            color: "blue"
-        });
+    // Given
+    var n = document.createElement('div');
+    n.setAttribute('id', 'test-node');
+    document.querySelector('body').appendChild(n);
+    var node = DOM.find('#test-node');
 
-        // Then
-        assertEquals("1px solid red", node.style.border);
-    },
-    "test we can hide a node": function() {
-        // Given
-        var n = document.createElement('div');
-        n.setAttribute('id', 'test-node');
-        document.querySelector('body').appendChild(n);
+    // When
+    DOM.css(node, {
+        border: "1px solid red",
+        color: "blue"
+    });
 
-        var node = $.find('#test-node')[0];
-        assertTrue($.isVisible(node));
+    // Then
+    equal(node.style.border, "1px solid red");
+});
 
-        // When
-        $.hide(node);
+test("test we can hide a node", function() {
+    init();
 
-        // Then
-        assertEquals("none", node.style.display);
-        assertFalse($.isVisible(node));
-    },
-    "test we can show a node": function() {
-        // Given
-        var n = document.createElement('div');
-        n.setAttribute('id', 'test-node');
-        document.querySelector('body').appendChild(n);
+    // Given
+    var n = document.createElement('div');
+    n.setAttribute('id', 'test-node');
+    document.querySelector('body').appendChild(n);
 
-        var node = $.find('#test-node')[0];
-        $.hide(node);
-        assertFalse($.isVisible(node));
+    var node = DOM.find('#test-node');
+    ok(DOM.isVisible(node));
 
-        // When
-        $.show(node);
+    // When
+    DOM.hide(node);
 
-        // Then
-        assertEquals("block", node.style.display);
-        assertTrue($.isVisible(node));
-    },
+    // Then
+    equal("none", node.style.display);
+    ok(!DOM.isVisible(node));
+});
+test("test we can show a node", function() {
+    init();
 
-    "test we can set or get data on node": function() {
-        // Given
-        var n = document.createElement('div');
-        n.setAttribute('id', 'test-node');
-        document.querySelector('body').appendChild(n);
-        var node = $.find("#test-node");
+    // Given
+    var n = document.createElement('div');
+    n.setAttribute('id', 'test-node');
+    document.querySelector('body').appendChild(n);
 
-        // When
-        $.data(node, "mydata", "myvalue");
+    var node = DOM.find('#test-node');
+    DOM.hide(node);
+    ok(!DOM.isVisible(node));
 
-        // Then
-        assertEquals("myvalue", $.data(node, "mydata"));
-    },
+    // When
+    DOM.show(node);
 
-    "test We can bind method call to set the context": function() {
-        // Given
-        var n = document.createElement('div');
-        n.setAttribute('id', 'toto');
-        document.body.appendChild(n);
-        var obj = {
-            click: function(e) {
-                e.preventDefault();
-                // Then
-                assertEquals(this, obj);
-            }
+    // Then
+    equal("block", node.style.display);
+    ok(DOM.isVisible(node));
+});
+
+test("test we can set or get data on node", function() {
+    init();
+
+    // Given
+    var n = document.createElement('div');
+    n.setAttribute('id', 'test-node');
+    document.querySelector('body').appendChild(n);
+    var node = DOM.find("#test-node");
+
+    // When
+    DOM.data(node, "mydata", "myvalue");
+
+    // Then
+    equal("myvalue", DOM.data(node, "mydata"));
+});
+
+test("test We can bind method call to set the context", function() {
+    init();
+
+    // Given
+    var n = document.createElement('div');
+    n.setAttribute('id', 'toto');
+    document.querySelector('body').appendChild(n);
+    var obj = {
+        click: function() {
+            // Then
+            deepEqual(this, obj);
         }
-        n.addEventListener('click', $.bind(obj, 'click'), true);
-
-        // When
-        n.click();
     }
+    n.onclick = DOM.bind(obj, 'click');
+
+    // When
+    n.onclick();
 });
