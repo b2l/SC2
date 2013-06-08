@@ -64,11 +64,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-browserify2');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-qunit');
     grunt.loadNpmTasks('grunt-qunit-serverless');
     grunt.loadNpmTasks('grunt-contrib-compass');
 
     grunt.registerTask('compile', 'browserify2:compile');
     grunt.registerTask('test', 'qunit-serverless');
     grunt.registerTask('default', ['copy:images', 'compass:dev', 'watch']);
+    grunt.registerTask('build', ['compass', 'compile']);
 }
