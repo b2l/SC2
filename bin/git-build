@@ -33,7 +33,7 @@ if [ -e "Gruntfile.js" ]; then
 
 	if [ $res -eq 0 ]; then
 		echo "Publishing to: $REMOTE_REPO"
-		git push $REMOTE_REPO master
+		git push origin master
 	else
 		echo "Unable to build"
 		exit $res
