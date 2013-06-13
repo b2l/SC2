@@ -32,6 +32,7 @@ if [ -e "Gruntfile.js" ]; then
     fi
 
 	if [ $res -eq 0 ]; then
+        cd ..
 		echo "Publishing to: $REMOTE_REPO"
 		git push origin master
 	else
