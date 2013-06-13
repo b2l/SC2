@@ -6,8 +6,8 @@ else
 fi
 
 if [ ! -z "$1" ]; then
-	it add .
-	it commit -a -m "$1"
+	git add .
+	git commit -a -m "$1"
 fi
 
 git pull
@@ -21,15 +21,22 @@ git clean -df
 git pull
 
 ## --- Run all test before pushing
-if [ -e "build.xml" ]; then
-	ant test
+if [ -e "Gruntfile.js" ]; then
+    res=0
+    npm install
+	grunt test
+    res=$?
+    if [ $res -eq 0 ]; then
+        play auto-test
+        res=$?
+    fi
 
-	if [ $? -eq 0 ]; then
+	if [ $res -eq 0 ]; then
 		echo "Publishing to: $REMOTE_REPO"
 		git push $REMOTE_REPO master
 	else
 		echo "Unable to build"
-		exit $?
+		exit $res
 	fi
 else
 	echo "Nothing to test here, is it a real git unbreakable project ?"
