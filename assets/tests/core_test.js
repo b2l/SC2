@@ -1,11 +1,13 @@
 var DOM = require('../javascripts/CORE/DOM.js');
 
-function init() {
+
+function setup() {
     document.querySelector('body').innerHTML = "";
 }
 
+
 test("test Assert we can get all dom node matching a selector", function () {
-    init();
+    setup();
 
     // Given
     var d = document.createElement("div");
@@ -26,7 +28,7 @@ test("test Assert we can get all dom node matching a selector", function () {
 });
 
 test("test we could apply style to node", function() {
-    init();
+    setup();
 
     // Given
     var n = document.createElement('div');
@@ -45,7 +47,7 @@ test("test we could apply style to node", function() {
 });
 
 test("test we can hide a node", function() {
-    init();
+    setup();
 
     // Given
     var n = document.createElement('div');
@@ -63,9 +65,9 @@ test("test we can hide a node", function() {
     ok(!DOM.isVisible(node));
 });
 test("test we can show a node", function() {
-    init();
+    setup();
 
-    // Given
+    // given
     var n = document.createElement('div');
     n.setAttribute('id', 'test-node');
     document.querySelector('body').appendChild(n);
@@ -74,16 +76,16 @@ test("test we can show a node", function() {
     DOM.hide(node);
     ok(!DOM.isVisible(node));
 
-    // When
+    // when
     DOM.show(node);
 
-    // Then
+    // then
     equal("block", node.style.display);
     ok(DOM.isVisible(node));
 });
 
 test("test we can set or get data on node", function() {
-    init();
+    setup();
 
     // Given
     var n = document.createElement('div');
@@ -99,7 +101,7 @@ test("test we can set or get data on node", function() {
 });
 
 test("test We can bind method call to set the context", function() {
-    init();
+    setup();
 
     // Given
     var n = document.createElement('div');

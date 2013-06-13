@@ -1,14 +1,18 @@
 ;(function(e,t,n){function i(n,s){if(!t[n]){if(!e[n]){var o=typeof require=="function"&&require;if(!s&&o)return o(n,!0);if(r)return r(n,!0);throw new Error("Cannot find module '"+n+"'")}var u=t[n]={exports:{}};e[n][0](function(t){var r=e[n][1][t];return i(r?r:t)},u,u.exports)}return t[n].exports}var r=typeof require=="function"&&require;for(var s=0;s<n.length;s++)i(n[s]);return i})({1:[function(require,module,exports){
+/* Unit test wrapper - simply add a require for your test file here and it will be auto test */
+
 require('./core_test');
 },{"./core_test":2}],2:[function(require,module,exports){
 var DOM = require('../javascripts/CORE/DOM.js');
 
-function init() {
+
+function setup() {
     document.querySelector('body').innerHTML = "";
 }
 
+
 test("test Assert we can get all dom node matching a selector", function () {
-    init();
+    setup();
 
     // Given
     var d = document.createElement("div");
@@ -29,7 +33,7 @@ test("test Assert we can get all dom node matching a selector", function () {
 });
 
 test("test we could apply style to node", function() {
-    init();
+    setup();
 
     // Given
     var n = document.createElement('div');
@@ -48,7 +52,7 @@ test("test we could apply style to node", function() {
 });
 
 test("test we can hide a node", function() {
-    init();
+    setup();
 
     // Given
     var n = document.createElement('div');
@@ -66,9 +70,9 @@ test("test we can hide a node", function() {
     ok(!DOM.isVisible(node));
 });
 test("test we can show a node", function() {
-    init();
+    setup();
 
-    // Given
+    // given
     var n = document.createElement('div');
     n.setAttribute('id', 'test-node');
     document.querySelector('body').appendChild(n);
@@ -77,16 +81,16 @@ test("test we can show a node", function() {
     DOM.hide(node);
     ok(!DOM.isVisible(node));
 
-    // When
+    // when
     DOM.show(node);
 
-    // Then
+    // then
     equal("block", node.style.display);
     ok(DOM.isVisible(node));
 });
 
 test("test we can set or get data on node", function() {
-    init();
+    setup();
 
     // Given
     var n = document.createElement('div');
@@ -102,7 +106,7 @@ test("test we can set or get data on node", function() {
 });
 
 test("test We can bind method call to set the context", function() {
-    init();
+    setup();
 
     // Given
     var n = document.createElement('div');
@@ -142,7 +146,7 @@ var DOM = {
         if (this.isVisible(domNode)) {
             this.hide(domNode);
         } else {
-            thid.show(domNode);
+            this.show(domNode);
         }
     },
     isVisible: function(domNode) {
@@ -168,7 +172,6 @@ var DOM = {
         }
     }
 };
-
 module.exports = DOM;
 },{}]},{},[1])
 ;

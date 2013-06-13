@@ -68,7 +68,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compass');
 
     grunt.registerTask('compile', 'browserify2:compile');
-    grunt.registerTask('test', 'qunit-serverless');
+    grunt.registerTask('test', ['browserify2:test', 'qunit-serverless']);
     grunt.registerTask('default', ['copy:images', 'compass:dev', 'watch']);
     grunt.registerTask('build', ['compass', 'compile']);
 }
