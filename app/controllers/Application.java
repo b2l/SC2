@@ -13,10 +13,12 @@ public class Application extends Controller {
 
     public static void index() {
     	File xml = new File("ressources/UnitData.xml");
-		XMLParserSC2 parser = new XMLParserSC2(xml);
 		
-		parser.parse();
-		List<String> units = parser.getUnitNames();
+		List<Unit> units = XMLParserSC2.parse(xml);
+		List<String> names = new ArrayList<String>();
+		for(Unit soldier : units){
+			names.add(soldier.name);
+		}
         render(units);
     }
 

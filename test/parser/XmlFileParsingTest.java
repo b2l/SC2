@@ -1,7 +1,10 @@
 package parser;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+
+import models.Unit;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -13,10 +16,12 @@ public class XmlFileParsingTest extends UnitTest{
 	@Test
 	public void getUnitsNamesTest(){
 		File xml = new File("ressources/UnitData.xml");
-		XMLParserSC2 parser = new XMLParserSC2(xml);
-		
-		parser.parse();
-		List<String> names = parser.getUnitNames();
+		List<Unit> units = XMLParserSC2.parse(xml);
+
+		List<String> names = new ArrayList<String>();
+		for(Unit soldier : units){
+			names.add(soldier.name);
+		}
 		
 		assertNotNull("List of sc2 unit names is not null", names);
 		assertTrue("List of sc2 unit names is not empty", names.size()>0);

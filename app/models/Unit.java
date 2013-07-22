@@ -3,21 +3,20 @@ package models;
 import java.io.File;
 
 public class Unit {
-	private String name;
-	private File picture;
+	public String name;
+	public String race;
+	public float supplyCost;
+	public int mineralCost;
+	public int gazCost;
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
+	public Unit(String name, String race, float supplyCost, int mineralCost,
+			int gazCost) {
+		super();
 		this.name = name;
-	}
-	public File getPicture() {
-		return picture;
-	}
-	public void setPicture(File picture) {
-		this.picture = picture;
+		this.race = race;
+		this.supplyCost = supplyCost;
+		this.mineralCost = mineralCost;
+		this.gazCost = gazCost;
 	}
 	
-
 }

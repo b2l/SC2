@@ -9,6 +9,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import models.Unit;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -18,14 +20,9 @@ import org.xml.sax.SAXException;
 
 
 public class XMLParserSC2 {
-	private File xml;
-	private Document parsedDocument;
 	
-	public XMLParserSC2(File xmlFile) {
-		xml= xmlFile;
-	}
 
-	public List<String> getUnitNames() {
+	public static List<String> getUnitNames( Document parsedDocument) {
 		NodeList units = parsedDocument.getElementsByTagName("CUnit");
 		List<String> names = new ArrayList<String>();
 		int nbUnits = units.getLength();
@@ -35,12 +32,39 @@ public class XMLParserSC2 {
 		}
 		return names;
 	}
+	
 
-	public void parse() {
+	public static List<Unit> parse(File xml) {
+		
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		List<Unit> units= new ArrayList();
 		try {
 			DocumentBuilder db = dbf.newDocumentBuilder();
-			parsedDocument = db.parse(xml);
+			Document parsedDocument = db.parse(xml);
+			//List<String> names = getUnitNames(parsedDocument);
+			NodeList unitsNode = parsedDocument.getElementsByTagName("CUnit");
+			int nbUnits = unitsNode.getLength();
+			
+			for(int i=0; i<nbUnits; i++){
+				Element element = (Element) unitsNode.item(i);
+				String name = element.getAttribute("id");
+				
+				NodeList army = element.getElementsByTagName("CostCategory");
+				
+				if (army.getLength()>0){
+					
+					if(((Element)army.item(0)).getAttribute("value") != null 
+							&& ((Element)army.item(0)).getAttribute("value").equalsIgnoreCase("Army")){
+						String race = getRace(element);
+						Unit unit = new Unit(name, race, 0, 0, 0);
+						units.add(unit);
+					}
+				}
+				
+				
+			}
+			
+			
 		}catch(ParserConfigurationException pce) {
 			pce.printStackTrace();
 		}catch(SAXException se) {
@@ -48,7 +72,16 @@ public class XMLParserSC2 {
 		}catch(IOException ioe) {
 			ioe.printStackTrace();
 		}
-		
+		return units;
 	}
 
+
+	private static String getRace(Element element) {
+		NodeList raceNode = element.getElementsByTagName("Race");
+		String race="";
+		if (raceNode.getLength()>0){
+			race = ((Element)raceNode.item(0)).getAttribute("value");
+		}
+		return race;
+	}
 }
