@@ -1,5 +1,4 @@
-(function() {
-    var DOM = require('./CORE/DOM.js');
+(function () {
+    var b = require('backbone');
 
-
-})();
+}());

@@ -38,6 +38,14 @@ module.exports = function(grunt) {
 
         browserify2: {
             compile: {
+                expose: {
+                    files: [
+                        {
+                            cwd: 'assets/javascripts/lib/',
+                            src: '**/*.js'
+                        }
+                    ]
+                },
                 entry: './assets/javascripts/app.js',
                 compile: './public/app.js'
             },
