@@ -1,0 +1,29 @@
+{
+  "name": "Lings",
+  "description": "SC2 applications, allow you to browse units with a lot of detail",
+  "version": "0.0.1",
+  "author": "Blandine DESCAMPS, blandine.descamps@ling.fr & Nicolas MEDDA, nicolas.medda@ling.fr",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/b2l/SC2"
+  },
+  "main": "srv/app.js",
+  "scripts": {
+    "tests": "grunt mochaTest:srv"
+  },
+  "engines": {
+    "node": ">= 0.8"
+  },
+  "dependencies": {
+    "q": "~0.9.7",
+    "xml2js": "~0.4.0",
+    "q-io": "~1.10.6",
+    "express": "~3.4.4"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-mocha-test": "~0.7.0",
+    "chai": "~1.8.1"
+  }
+}
