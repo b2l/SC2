@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var FS = require('fs');
-var SC2DataParser = require('../lib/SC2DataParser');
+var SC2DataParser = require('../app/lib/SC2DataParser');
 
 describe('Parser', function() {
 

@@ -3,6 +3,16 @@ var Units = require('./Units');
 var FS = require('q-io/fs');
 var SC2DataParser = require('./lib/SC2DataParser');
 
+function Race(race) {
+    this._race = {
+        'Prot': 'protoss',
+        'Terr': 'terran',
+        'Zerg': 'zerg'
+    }
+
+    return this._race[race] || undefined;
+};
+
 var units = new Units();
 if ( units.all().length === 0 ) {
 
@@ -12,9 +22,15 @@ if ( units.all().length === 0 ) {
     parser.parse(filePath).then(function(data) {
 
         data.Catalog.CUnit.forEach(function(unit) {
-            var name = unit.$.id;
-            units.create({name: name});
+            var obj = {};
+            obj.name = unit.$.id;
+
+            if (unit['Race']) {
+                obj.race = Race(unit['Race'][0].$.value);
+                units.create(obj);
+            }
         });
+
 
     }, function(err) {
         console.error(err);
@@ -32,6 +48,12 @@ app.get('/', function(req, res) {
 app.get('/units', function(req, res) {
     res.json(
         units.all()
+    );
+});
+
+app.get('/units/:race', function(req, res) {
+    res.json(
+        units.byRace(req.params.race)
     );
 });
 
