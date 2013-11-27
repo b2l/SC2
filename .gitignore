@@ -4,4 +4,7 @@
 !.gitignore
 # node dependencies
 node_modules
-
+# generated content
+public/js
+public/css
+public/img

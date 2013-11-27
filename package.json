@@ -25,7 +25,10 @@
     "grunt-contrib-watch": "~0.5.3",
     "grunt-mocha-test": "~0.7.0",
     "chai": "~1.8.1",
-    "nodemon": "~0.7.10",
-    "grunt-nodemon": "~0.1.2"
+    "grunt-contrib-sass": "~0.5.1",
+    "grunt-express": "~1.2.1",
+    "grunt-nodemon": "~0.1.2",
+    "grunt-concurrent": "~0.4.2",
+    "grunt-browserify2": "~0.1.8"
   }
 }
