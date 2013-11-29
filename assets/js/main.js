@@ -1,11 +1,11 @@
-var request = require('superagent');
 
 var $appWrapper = document.getElementById('app-wrapper');
 
+// TODO : Find a great lib for ajax call
 
-request
-    .post('/units')
-    .end(onGetUnits);
+//request
+//    .post('/units')
+//    .end(onGetUnits);
 
 function onGetUnits(error, res) {
     if (error) {
