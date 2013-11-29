@@ -1,8 +1,25 @@
+var request = require('superagent');
 
-var text = "ma superbe appli qui rocks des poneys";
+var $appWrapper = document.getElementById('app-wrapper');
 
-var p = document.createElement('p');
 
-p.innerHTML = text;
+request
+    .post('/units')
+    .end(onGetUnits);
 
-document.body.appendChild(p);
+function onGetUnits(error, res) {
+    if (error) {
+        $appWrapper.write('ERROR retrieving units : ', error);
+    } else {
+        var units = res;
+        var ul = document.createElement('ul');
+        units.forEach(function(unit) {
+            var li = document.createElement('li');
+            li.innerHTML = unit;
+            ul.appendChild(ul);
+        });
+        $appWrapper.appendChild(ul);
+    }
+}
+
+
