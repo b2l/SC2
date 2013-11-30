@@ -16,6 +16,7 @@ describe('Parser', function() {
             var oracle = data.Catalog.CUnit.filter(function(unit) {
                 return unit.$.id === "Oracle";
             });
+
             expect(oracle).to.have.length(1);
             done()
         });

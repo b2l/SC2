@@ -1,0 +1,72 @@
+[
+    {
+        "name": "larva",
+        "race": "zerg",
+        "life": 25,
+        "mineral": 0,
+        "vespene": 0,
+        "armySupply": 0,
+        "armor": 10,
+        "damage": 0
+    },
+    {
+        "name": "drone",
+        "race": "zerg",
+        "life": 40,
+        "mineral": 50,
+        "vespene": 0,
+        "armySupply": 1,
+        "armor": 0,
+        "damage": 5,
+        "attackSpeed": "normal",
+        "attackType": "ground",
+        "range": 0,
+        "speed": "fast",
+        "builder": "larva",
+        "buildTime": 17
+    },
+    {
+        "name": "overlord",
+        "race": "zerg",
+        "life": 200,
+        "mineral": 100,
+        "vespene": 0,
+        "armySupply": 0,
+        "armor": 0,
+        "damage": 0,
+        "speed": "very slow",
+        "builder": "larva",
+        "buildTime": 25
+    },
+    {
+        "name": "zergling",
+        "race": "zerg",
+        "life": 35,
+        "mineral": 50,
+        "vespene": 0,
+        "armySupply": 1,
+        "armor": 0,
+        "damage": 5,
+        "attackSpeed": "fast",
+        "attackType": "ground",
+        "speed": "fast",
+        "builder": "larva",
+        "buildTime": 24
+    },
+    {
+        "name": "hydralisk",
+        "race": "zerg",
+        "life": 80,
+        "mineral": 100,
+        "vespene": 50,
+        "armySupply": 2,
+        "armor": 0,
+        "damage": 12,
+        "attackSpeed": "fast",
+        "attackType": "any",
+        "attackRange": 5,
+        "speed": "normal",
+        "builder": "larva",
+        "buildTime": 333
+    }
+]

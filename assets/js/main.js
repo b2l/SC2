@@ -1,25 +1,25 @@
+var XHR = require('reqwest');
 
 var $appWrapper = document.getElementById('app-wrapper');
 
-// TODO : Find a great lib for ajax call
+XHR({
+    url: '/units',
+    type: 'get'
+}).then(function(res) {
+    onGetUnits(res);
+}).fail(function(err, mesg) {
+    $appWrapper.write('ERROR retrieving units : ', err, mesg);
+});
 
-//request
-//    .post('/units')
-//    .end(onGetUnits);
-
-function onGetUnits(error, res) {
-    if (error) {
-        $appWrapper.write('ERROR retrieving units : ', error);
-    } else {
-        var units = res;
-        var ul = document.createElement('ul');
-        units.forEach(function(unit) {
-            var li = document.createElement('li');
-            li.innerHTML = unit;
-            ul.appendChild(ul);
-        });
-        $appWrapper.appendChild(ul);
-    }
+function onGetUnits(res) {
+    var units = JSON.parse(res.response);
+    var ul = document.createElement('ul');
+    units.forEach(function(unit) {
+        var li = document.createElement('li');
+        li.innerHTML = unit.name + " - " + unit.race;
+        ul.appendChild(li);
+    });
+    $appWrapper.appendChild(ul);
 }
 
 
