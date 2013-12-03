@@ -1,5 +1,6 @@
 var XHR = require('reqwest');
 var Q = require('q');
+var _unitList = require('./templates/unitList');
 
 var $appWrapper = document.getElementById('app-wrapper');
 
@@ -61,16 +62,7 @@ UnitView.prototype.preRender = function() {
 };
 
 UnitView.prototype.render = function() {
-    var ul = document.createElement('ul');
-
-    this.units.forEach(function(unit) {
-        var li = document.createElement('li');
-        li.innerHTML = unit.race + " - " + unit.name;
-        ul.appendChild(li);
-    });
-
-    this.$element.innerHTML = "";
-    this.$element.appendChild(ul);
+    this.$element.innerHTML = _unitList(this.units);
 };
 
 

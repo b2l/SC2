@@ -20,7 +20,7 @@ module.exports = function (grunt) {
             },
             uglify: {
                 files: 'public/js/main.js',
-                tasks: ['uglify:prod']
+                tasks: ['uglify:' + environment]
             }
         },
 

@@ -1,0 +1,3 @@
+(function(){function unitList(it) {
+var out='<h2>Unit list</h2><ul>';var arr1=it.units;if(arr1){var unit,index=-1,l1=arr1.length-1;while(index<l1){unit=arr1[index+=1];out+=' <li>'+( unit.race )+'  -  '+( unit.name )+'</li>';} } out+='</ul>';return out;
+}var itself=unitList;if(typeof module!=='undefined' && module.exports) module.exports=itself;else if(typeof define==='function')define(function(){return itself;});else {window.render=window.render||{};window.render['unitList']=itself;}}());

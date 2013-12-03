@@ -20,7 +20,10 @@
     "q-io": "~1.10.6",
     "express": "~3.4.4",
     "reqwest": "~0.9.3",
-    "ejs": "~0.8.5"
+    "ejs": "~0.8.5",
+    "dot": "~1.0.2",
+    "commander": "~2.1.0",
+    "mkdirp": "~0.3.5"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
