@@ -1,4 +1,6 @@
 module.exports = function (grunt) {
+    var environment = grunt.option('env') || 'dev';
+
     // Project configuration.
     grunt.initConfig({
 
@@ -15,6 +17,10 @@ module.exports = function (grunt) {
             browserify: {
                 files: 'assets/js/**/*.js',
                 tasks: ['browserify2']
+            },
+            uglify: {
+                files: 'public/js/main.js',
+                tasks: ['uglify:prod']
             }
         },
 
@@ -23,6 +29,16 @@ module.exports = function (grunt) {
             compile: {
                 entry: './assets/js/main.js',
                 compile: './public/js/main.js'
+            }
+        },
+
+        uglify: {
+            prod: {
+                files: {
+                    'public/js/main.min.js': 'public/js/main.js'
+                }
+            },
+            dev: {
             }
         },
 
@@ -38,10 +54,18 @@ module.exports = function (grunt) {
 
         /* Sass compilation */
         sass: {
-            dist: {
+            prod: {
+                options: {
+                    style: 'compressed'
+                },
+                files: {
+                    'public/css/main.css': 'assets/sass/main.scss'
+                }
+            },
+            dev: {
                 options: {
                     style: 'expanded',
-                    debug: 'true'
+                    debug: true
                 },
                 files: {
                     'public/css/main.css': 'assets/sass/main.scss'
@@ -53,11 +77,21 @@ module.exports = function (grunt) {
         nodemon: {
             dev: {
                 options: {
-                    file: 'srv/app/app.js',
-                    watchedExtensions: ['.js'],
-                    watchedFolder: ['srv/app'],
+                    file: 'app/app.js',
+                    cwd: 'srv',
                     env: {
-                        PORT: '3000'
+                        PORT: '3000',
+                        env: 'dev'
+                    }
+                }
+            },
+            prod: {
+                options: {
+                    file: 'app/app.js',
+                    cwd: 'srv',
+                    env: {
+                        PORT: '3000',
+                        env: 'prod'
                     }
                 }
             }
@@ -65,17 +99,18 @@ module.exports = function (grunt) {
 
         /* Launch multiple task in parallel*/
         concurrent: {
-            tasks: ['nodemon', 'watch'],
+            tasks: ['nodemon:'+environment, 'watch'],
             options: {
                 logConcurrentOutput: true
             }
         }
     });
 
-    grunt.registerTask('default', ['sass', 'browserify2', 'concurrent']);
+    grunt.registerTask('default', ['sass:' + environment, 'browserify2', 'uglify:'+environment, 'concurrent']);
 
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-mocha-test');
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-concurrent');

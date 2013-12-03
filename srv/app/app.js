@@ -10,6 +10,9 @@ var express = require('express');
 var app = express();
 
 /** MIDDLEWARE */
+// Gzip
+app.use(express.compress());
+// Static
 app.use(express.static(__dirname + '/../../public/'));
 
 // Allow us to nicely declare routes
@@ -19,7 +22,7 @@ app.map = require('./lib/dispatcher')(app);
 app.map({
     '/': {
         get: function(req, res) {
-            res.sendfile('public/html/index.html');
+            res.render(__dirname + '/views/index.ejs');
         },
         'units': {
             get:  function(req, res) {
