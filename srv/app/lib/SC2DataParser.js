@@ -14,7 +14,7 @@ SC2DataParser.prototype.parse = function(filePath) {
             if (err) {
                 throw new Error('Parsing error ', err);
             }
-            deferred.resolve(result);
+            deferred.resolve(resultq);
         });
     }, function(err) {
         console.error(err);
