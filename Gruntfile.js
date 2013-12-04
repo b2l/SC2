@@ -1,3 +1,4 @@
+
 module.exports = function (grunt) {
     var environment = grunt.option('env') || 'dev';
 
@@ -21,6 +22,10 @@ module.exports = function (grunt) {
             uglify: {
                 files: 'public/js/main.js',
                 tasks: ['uglify:' + environment]
+            },
+            template: {
+                files: 'assets/js/templates/**/*.jst',
+                tasks: ['dot-packer:dev']
             }
         },
 
@@ -39,6 +44,14 @@ module.exports = function (grunt) {
                 }
             },
             dev: {
+            }
+        },
+
+        /* Pre compile doT template */
+        "dot-packer": {
+            dev: {
+                dest: 'assets/js/templates/',
+                source: 'assets/js/templates/'
             }
         },
 
@@ -107,6 +120,8 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('default', ['sass:' + environment, 'browserify2', 'uglify:'+environment, 'concurrent']);
+    grunt.loadTasks('config');
+    grunt.registerTask('dot', 'dot-packer:dev');
 
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-sass');
