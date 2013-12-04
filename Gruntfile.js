@@ -24,8 +24,8 @@ module.exports = function (grunt) {
                 tasks: ['uglify:' + environment]
             },
             template: {
-                files: 'assets/js/templates/**/*.jst',
-                tasks: ['dot-packer:dev']
+                files: 'assets/templates/**/*.jst',
+                tasks: ['dot-packer:dev', 'browserify2']
             }
         },
 
@@ -50,8 +50,8 @@ module.exports = function (grunt) {
         /* Pre compile doT template */
         "dot-packer": {
             dev: {
-                dest: 'assets/js/templates/',
-                source: 'assets/js/templates/'
+                dest: 'assets/templates/',
+                source: 'assets/templates/'
             }
         },
 
