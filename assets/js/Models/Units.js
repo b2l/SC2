@@ -26,7 +26,6 @@ Units.all = function() {
                 this.cache = u;
                 setTimeout(function() {
                     deferred.resolve(u);
-
                 }, 1000);
             }.bind(this)).fail(function(err, mesg) {
                 deferred.reject(err, mesg);
@@ -42,6 +41,10 @@ Units.prototype.add = function(unit) {
 
 Units.prototype.forEach = function(cb) {
     Array.prototype.forEach.call(this.units, cb);
+};
+
+Units.prototype.find = function(filterFunction) {
+    return this.units.filter(filterFunction);
 };
 
 

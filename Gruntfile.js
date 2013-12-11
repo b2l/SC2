@@ -37,6 +37,7 @@ module.exports = function (grunt) {
             }
         },
 
+        /* Minify JS code for production */
         uglify: {
             prod: {
                 files: {
@@ -82,6 +83,15 @@ module.exports = function (grunt) {
                 },
                 files: {
                     'public/css/main.css': 'assets/sass/main.scss'
+                }
+            },
+            styleguide: {
+                options: {
+                    style: 'compressed',
+                    debug: false
+                },
+                files: {
+                    'public/css/sg.css': 'assets/sass/styleguide.scss'
                 }
             }
         },

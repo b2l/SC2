@@ -1,6 +1,20 @@
-<h2>Unit list</h2>
-<ul>
-{{~ it.units :unit:index }}
-    <li>{{= unit.race }}  -  {{= unit.name }}</li>
-{{~}}
-</ul>
+<div class="compare-units-content">
+    <div class="compare-unit-one">
+        <select>
+            {{~ it.units :unit:index }}
+                <option value="{{= unit.name }}">{{= unit.name }}</option>
+            {{~}}
+        </select>
+        <div class="unit-card">
+        </div>
+    </div>
+    <div class="compare-unit-two">
+        <select>
+            {{~ it.units :unit:index }}
+                <option value="{{= unit.name }}">{{= unit.name }}</option>
+            {{~}}
+        </select>
+        <div class="unit-card">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<img alt="unit" src="/public/img/{{= it.picture }}">
+<div class="infos">
+    <h3>{{= it.name }}</h3>
+
+    {{~ Object.keys(it) :property }}
+        <div>
+            <span class="label">{{= property }}</span>
+            <span class="value">{{= it[property] }}</span>
+        </div>
+    {{~}}
+</div>

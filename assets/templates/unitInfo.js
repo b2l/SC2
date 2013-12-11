@@ -1,0 +1,3 @@
+(function(){function unitInfo(it) {
+var out='<img alt="unit" src="/public/img/'+( it.picture )+'"><div class="infos"> <h3>'+( it.name )+'</h3> ';var arr1=Object.keys(it);if(arr1){var property,i1=-1,l1=arr1.length-1;while(i1<l1){property=arr1[i1+=1];out+=' <div> <span class="label">'+( property )+'</span> <span class="value">'+( it[property] )+'</span> </div> ';} } out+='</div>';return out;
+}var itself=unitInfo;if(typeof module!=='undefined' && module.exports) module.exports=itself;else if(typeof define==='function')define(function(){return itself;});else {window.render=window.render||{};window.render['unitInfo']=itself;}}());

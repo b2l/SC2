@@ -1,0 +1,46 @@
+.base-form-style {
+  border: 1px solid $second_blue;
+  border-radius: 2px;
+  padding: 2px 4px;
+  background: white;
+  color: $second_blue;
+
+  &:active, &:focus {
+    border-color: darken($primary_blue, 5%);
+    box-shadow: 0 0 1px 1px darken($primary_blue, 5%);
+    outline: none;
+  }
+}
+
+textarea, input[type="text"], input[type="password"], input[type="radio"], input[type="checkbox"], select {
+  @extend .base-form-style;
+}
+
+input[type="text"], input[type="password"] {
+  @extend .base-form-style;
+  width: 150px;
+}
+
+input[type="submit"] {
+  @extend .base-form-style;
+  color: white;
+  background: $second_blue;
+  border: 1px solid $main_blue;
+  padding: 2px 6px;
+}
+
+label {
+  color: $second_blue;
+}
+
+a.cancel {
+  color: $second_blue;
+  text-decoration: underline;
+  font-size: 90%;
+}
+
+select {
+  @extend .base-form-style;
+  background: white;
+  width: 150px;
+}
